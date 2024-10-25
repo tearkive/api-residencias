@@ -8,6 +8,7 @@ const {createConnectionPool} = require('./config/database');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var alumnosRouter = require('./routes/alumnos');
+var empresaRouter = require('./routes/empresaControlador');
 
 var app = express();
 
@@ -25,6 +26,7 @@ createConnectionPool();
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/alumnos', alumnosRouter);
+app.use('/empresa', empresaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
