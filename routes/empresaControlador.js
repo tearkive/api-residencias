@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { getEmpresa } = require('../business/empresa');
-const { createEmpresa } = require('../business/empresa');
-const { updateEmpresa } = require('../business/empresa');
+const { getEmpresa, createEmpresa, updateEmpresa, getAsesorExterno, createAsesorExterno, updateAsesorExterno } = require('../business/empresa');
 
 router.get('/', function(req, res, next) {
     res.send('respond with a resource');
@@ -25,5 +23,20 @@ router.put('/updateEmpresa', async function(req, res, next) {
     res.send(response);
 });
 
+router.get('/getAsesorExterno', async function(req, res, next) {
+    const response = await getAsesorExterno();
+    res.send(response);
+});
 
+router.post('/createAsesorExterno', async function(req, res, next) {
+    const { nombre, email ,  telefono, puesto, idEmpresa } = req.body;
+    const response = await createAsesorExterno(nombre, email ,  telefono, puesto, idEmpresa);
+    res.send(response);
+});
+
+router.put('/updateAsesorExterno', async function(req, res, next) {
+    const { id, nombre, email ,  telefono, puesto, idEmpresa } = req.body;
+    const response = await updateAsesorExterno(id, nombre, email ,  telefono, puesto, idEmpresa);
+    res.send(response);
+});
 module.exports = router;
