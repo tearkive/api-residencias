@@ -1,9 +1,9 @@
 const {getConnection} = require('../config/database');
 
-async function getStudents() {
+async function getTeachers() {
     try {
         const connection = await getConnection();
-        const query = `select * from Alumno`;
+        const query = `select * from Maestro`;
         let result;
         try {
             result = await connection.query(query);
@@ -18,13 +18,13 @@ async function getStudents() {
     }
 }
 
-async function insertStudent(params){
+async function insertTeacher(params){
     try {
         const connection = await getConnection();
-        const query = `insert into Alumno (numeroControl, email, nombre, apellidos, carreraId) values (?,?,?,?,?)`;
+        const query = `insert into Maestro (nombre, email, telefono, idCarrera) values (?,?,?,?,?)`;
         let result;
         try {
-            result = await connection.query(query, [params.numeroControl, params.email, params.nombre, params.apellidos, params.carreraId]);
+            result = await connection.query(query, [params.nombre, params.email, params.telefono, params.carreraId]);
         } catch (error) {
             await connection.rollback();
             await connection.release();
@@ -38,13 +38,13 @@ async function insertStudent(params){
     }
 }
 
-async function updateStudent(id, params) {
+async function updateTeacher(id, params) {
     try {
         const connection = await getConnection();
-        const query = `update Alumno set numeroControl = ?, email = ?, nombre = ?, apellidos = ?, carreraId = ? WHERE id = ?`;
+        const query = `update Maestro set nombre = ?, email = ?, telefono = ?, carreraId = ? WHERE id = ?`;
         let result;
         try {
-            result = await connection.query(query, [params.numeroControl, params.email, params.nombre, params.apellidos, params.carreraId, id]);
+            result = await connection.query(query, [params.nombre, params.email, params.telefono, params.carreraI, id]);
         } catch (e) {
             await connection.rollback();
             await connection.release();
@@ -58,10 +58,10 @@ async function updateStudent(id, params) {
     }
 }
 
-async function findStudentsByCareer(params) {
+async function findTeachersByCareer() {
     try {
         const connection = await getConnection();
-        const query =  `select * from Alumno a left join Carrera c on a.carreraId = c.id where c.nombre = ?`;
+        const query =  `select * from Maestro m left join Carrera c on m.carreraId = c.id where c.nombre = ?`;
         let result;
         try {
             result = await connection.query(query, params.nombreCarrera);
@@ -76,4 +76,4 @@ async function findStudentsByCareer(params) {
     }
 }
 
-module.exports = { getStudents, insertStudent, updateStudent, findStudentsByCareer }
+module.exports = { getTeachers, insertTeacher, updateTeacher, findTeachersByCareer }
