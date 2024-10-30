@@ -16,6 +16,7 @@ var periodosRouter = require('./routes/periodos');
 var documentosRouter = require('./routes/documentos');
 var proyectosRouter = require('./routes/proyectos');
 var carreraRouter = require('./routes/carrera');
+var asesorRouter = require('./routes/asesorRevisor');
 
 var app = express();
 
@@ -41,6 +42,7 @@ app.use('/periodos', periodosRouter);
 app.use('/documentos', documentosRouter);
 app.use('/proyectos', proyectosRouter);
 app.use('/carrera', carreraRouter);
+app.use('/asesores', asesorRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
