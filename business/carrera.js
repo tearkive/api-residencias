@@ -43,7 +43,7 @@ async function postCareer(careerData) {
 async function putCareer(id, careerData) {
     try {
         const connection = await getConnection();
-        const query = `UPDATE Carrera SET nombre = ?,turno = ?, WHERE id = ?`;
+        const query = `UPDATE Carrera SET nombre = ?,turno = ? WHERE id = ?`;
         const values = [careerData.nombre,careerData.turno, id];
 
         let result;
