@@ -21,7 +21,7 @@ async function getTeachers() {
 async function insertTeacher(params){
     try {
         const connection = await getConnection();
-        const query = `insert into Maestro (nombre, email, telefono, idCarrera) values (?,?,?,?,?)`;
+        const query = `insert into Maestro (nombre, email, telefono, idCarrera) values (?,?,?,?)`;
         let result;
         try {
             result = await connection.query(query, [params.nombre, params.email, params.telefono, params.carreraId]);
@@ -41,10 +41,10 @@ async function insertTeacher(params){
 async function updateTeacher(id, params) {
     try {
         const connection = await getConnection();
-        const query = `update Maestro set nombre = ?, email = ?, telefono = ?, carreraId = ? WHERE id = ?`;
+        const query = `update Maestro set nombre = ?, email = ?, telefono = ?, idCarrera = ? WHERE id = ?`;
         let result;
         try {
-            result = await connection.query(query, [params.nombre, params.email, params.telefono, params.carreraI, id]);
+            result = await connection.query(query, [params.nombre, params.email, params.telefono, params.carreraId, id]);
         } catch (e) {
             await connection.rollback();
             await connection.release();
