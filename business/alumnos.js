@@ -41,7 +41,7 @@ async function insertStudent(params){
 async function updateStudent(id, params) {
     try {
         const connection = await getConnection();
-        const query = `update Alumno set numeroControl = ?, email = ?, nombre = ?, apellidos = ?, carreraId = ? WHERE id = ?`;
+        const query = `update Alumno set numeroControl = ?, email = ?, nombre = ?, apellidos = ?, carreraId = ? WHERE numeroControl = ?`;
         let result;
         try {
             result = await connection.query(query, [params.numeroControl, params.email, params.nombre, params.apellidos, params.carreraId, id]);
