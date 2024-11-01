@@ -61,7 +61,7 @@ async function updateStudent(id, params) {
 async function findStudentsByCareer(params) {
     try {
         const connection = await getConnection();
-        const query =  `select * from Alumno a left join Carrera c on a.carreraId = c.id where c.nombre = ?`;
+        const query =  `select a.* from Alumno a left join Carrera c on a.carreraId = c.id where c.nombre = ?`;
         let result;
         try {
             result = await connection.query(query, params.nombreCarrera);
@@ -72,7 +72,7 @@ async function findStudentsByCareer(params) {
         await connection.release();
         return { success: true, data: result };
     } catch (error) {
-        return { success: false, error: `${e}`};
+        return { success: false, error: `${error}`};
     }
 }
 

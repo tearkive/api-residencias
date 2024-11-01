@@ -61,7 +61,7 @@ async function updateTeacher(id, params) {
 async function findTeachersByCareer() {
     try {
         const connection = await getConnection();
-        const query =  `select * from Maestro m left join Carrera c on m.carreraId = c.id where c.nombre = ?`;
+        const query =  `select m.* from Maestro m left join Carrera c on m.carreraId = c.id where c.nombre = ?`;
         let result;
         try {
             result = await connection.query(query, params.nombreCarrera);
